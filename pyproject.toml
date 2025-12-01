@@ -1,0 +1,19 @@
+[project]
+name = "ai-experiment"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.13"
+dependencies = [
+    "dtw-python>=1.7.2",
+    "gym==0.22.0",
+    "gymnasium>=1.2.2",
+    "pysptk>=1.0.1",
+    "pyworld>=0.3.5",
+    "torch>=2.9.1",
+]
+
+[dependency-groups]
+dev = [
+    "ipykernel>=7.1.0",
+]
