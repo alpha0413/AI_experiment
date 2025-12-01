@@ -79,11 +79,11 @@ for interact_mode in ['train', 'test']:  # 一周目: train, 二周目: test
         else:
             agent.stop_episode()
         sum_of_all_rewards += sum_of_rewards
-        sum_of_all_step += sum_of_step
+        sum_of_all_step += min(300,sum_of_step)
         # 数 episodes に一回、統計情報を表示
         if (i_episode + 1) % every_print_statistics[interact_mode] == 0 or prints_detail[interact_mode]:
             average_rewards = sum_of_all_rewards / (i_episode + 1)
-            average_step = min(300,sum_of_all_step) / (i_episode + 1)
+            average_step = sum_of_all_step / (i_episode + 1)
             print(interact_mode, 'episode:', i_episode + 1, 'T:', '???',
                   'R:', average_rewards,'step:', average_step, 'statistics:', agent.get_statistics())
     print(interact_mode, 'finished.')
