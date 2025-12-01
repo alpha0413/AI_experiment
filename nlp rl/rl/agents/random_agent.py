@@ -28,6 +28,8 @@ class RandomAgent(abstract_agent.Agent):
         self.stop_episode()
 
     def act(self, obs):
+        # print("これがobjの結果です。")
+        # print(obs)
         return np.random.randint(self.action_num)
 
     def train(self, obs, reward):
