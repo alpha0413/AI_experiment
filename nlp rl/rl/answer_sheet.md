@@ -27,18 +27,18 @@ env:
 
 平均step数
 
-train: 130.61
-test: 128.16
+train: 45.86
+test: 51.59
 
 ## 演習 1.1.8
 
 平均step数
 
-train:
-test:
+train: 7.98
+test: 7.13
 
-train first 10:
-train last 10:
+train first 10: 24.6
+train last 10:8.02
 
 ## 演習 1.1.10
 

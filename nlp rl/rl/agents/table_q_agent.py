@@ -71,7 +71,8 @@ class TableQAgent(abstract_agent.Agent):
                 #       self.q_table の実装がどのようになっているかに注意してください。
                 # ------------
                 # max_q = # here #
-                raise NotImplementedError()
+                max_q = np.max(self.q_table[obs_key])
+                # raise NotImplementedError()
                 # ------------
             else:
                 max_q = 0.0
@@ -84,7 +85,8 @@ class TableQAgent(abstract_agent.Agent):
             # です。ここで、pは学習率、gは割引率です。
             # ------------
             # self.q_table[# here #][# here #] = # here #
-            raise NotImplementedError()
+            self.q_table[last_obs_key][self.last_action] = (1-self.learning_rate)*(self.q_table[last_obs_key][self.last_action]) + self.learning_rate*(reward+self.discount_factor*max_q)
+            # raise NotImplementedError()
             # ------------
 
         # 観測を保存
@@ -113,7 +115,8 @@ class TableQAgent(abstract_agent.Agent):
         # Hint: random_agent.py を参考にしてみましょう。
         # ------------
         # random_action = # here #
-        raise NotImplementedError()
+        random_action = np.random.randint(self.action_num)
+        # raise NotImplementedError()
         # ------------
 
         # exploitation (活用)
@@ -122,7 +125,8 @@ class TableQAgent(abstract_agent.Agent):
         # Hint: np.argmax() を使うとよいでしょう。
         # ------------
         # max_q_action = # here #
-        raise NotImplementedError()
+        max_q_action = np.argmax(self.q_table[obs_key])
+        # raise NotImplementedError()
         # ------------
 
         # どっちか選択
@@ -131,7 +135,11 @@ class TableQAgent(abstract_agent.Agent):
         # Hint: np.random.choice() を使うとよいでしょう。
         # ------------
         # action = # here #
-        raise NotImplementedError()
+        if np.random.choice(2,1,p=[self.exploration_prob,1-self.exploration_prob])==0:
+            action = random_action
+        else:
+            action = max_q_action
+        # raise NotImplementedError()
         # ------------
 
         return action
