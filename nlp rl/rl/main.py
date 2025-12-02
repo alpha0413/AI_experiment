@@ -5,8 +5,8 @@ from print_buffer import PrintBuffer
 
 
 # 環境と agent を用意
-env = gym.make('EasyMaze-v0')
-# env = gym.make('CartPole-v0')
+# env = gym.make('EasyMaze-v0')
+env = gym.make('CartPole-v0')
 # agent = agents.RandomAgent(env)
 # agent = agents.RulebaseAgent(env)
 # agent = agents.TableQAgent(env)
@@ -28,9 +28,10 @@ render_buffer = PrintBuffer()
 # 学習設定
 # 行うepisode 数
 # n_episode = {'train': 100, 'test': 100}
-n_episode = {'train': 100, 'test': 100}
+n_episode = {'train': 200, 'test': 10}
 # 何step 経ったらepisode を強制終了するか
 n_max_time = {'train': 300, 'test': 300}
+# n_max_time = {'train': 1000, 'test': 1000}
 # ゲームを繰り返す
 for interact_mode in ['train', 'test']:  # 一周目: train, 二周目: test
     sum_of_all_rewards = 0.0  # episode ごとの average reward を出すために、総計を覚えておく
