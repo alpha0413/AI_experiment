@@ -27,7 +27,8 @@ render_buffer = PrintBuffer()
 
 # 学習設定
 # 行うepisode 数
-n_episode = {'train': 100, 'test': 100}
+# n_episode = {'train': 100, 'test': 100}
+n_episode = {'train': 100, 'test': 1}
 # 何step 経ったらepisode を強制終了するか
 n_max_time = {'train': 300, 'test': 300}
 # ゲームを繰り返す
@@ -86,5 +87,5 @@ for interact_mode in ['train', 'test']:  # 一周目: train, 二周目: test
             average_step = sum_of_all_step / (i_episode + 1)
             print(interact_mode, 'episode:', i_episode + 1, 'T:', '???',
                   'R:', average_rewards,'step:', average_step, 'statistics:', agent.get_statistics())
-            print(agent.g_table_to_str())
+            print(agent.q_table_to_str())
     print(interact_mode, 'finished.')
