@@ -34,7 +34,8 @@ class TableQAgent(abstract_agent.Agent):
         return self.select_action(obs)
 
     def act(self, obs):
-        return self.select_action(obs)
+        # return self.select_action(obs)
+        return self.select_action_by_greedy(obs)
 
     def stop_episode_and_train(self, obs, reward, done=False):
         self.train(obs, reward)
@@ -102,6 +103,17 @@ class TableQAgent(abstract_agent.Agent):
             action = np.random.randint(self.action_num)
         self.last_action = action
         return action
+    
+    def select_action_by_greedy(self, obs):
+        obs_key = self.observation_to_key(obs)
+        if obs_key in self.q_table:
+            # 観測から行動を決める
+            action = self.greedy(obs_key)
+        else:
+            # Q値がまだ定まっていないのでランダムに動く
+            action = np.random.randint(self.action_num)
+        self.last_action = action
+        return action
 
     def observation_to_key(self, obs):
         return tuple(obs.values())
@@ -143,6 +155,45 @@ class TableQAgent(abstract_agent.Agent):
         # ------------
 
         return action
+
+    def greedy(self, obs_key):
+        # 次の行動を epsilon-greedy ( max_a Q(s, a) )で決める
+
+        # exploration (探索)
+        # ---穴埋め---
+        # random_action に 0, 1, ..., (self.action_num - 1)のうちランダムな番号が入るようにしてください。
+        # Hint: random_agent.py を参考にしてみましょう。
+        # ------------
+        # random_action = # here #
+        # random_action = np.random.randint(self.action_num)
+        # raise NotImplementedError()
+        # ------------
+
+        # exploitation (活用)
+        # ---穴埋め---
+        # max_q_action に 0, 1, ..., (self.action_num - 1)のうちQ値の最も大きい番号が入るようにしてください。
+        # Hint: np.argmax() を使うとよいでしょう。
+        # ------------
+        # max_q_action = # here #
+        max_q_action = np.argmax(self.q_table[obs_key])
+        # raise NotImplementedError()
+        # ------------
+
+        # どっちか選択
+        # ---穴埋め---
+        # action に確率 e で random_action が、確率 1-e でmax_q_action が入るようにしてください。
+        # Hint: np.random.choice() を使うとよいでしょう。
+        # ------------
+        # action = # here #
+        # if np.random.choice(2,1,p=[self.exploration_prob,1-self.exploration_prob])==0:
+        #     action = random_action
+        # else:
+        #     action = max_q_action
+        # raise NotImplementedError()
+        # ------------
+
+        # return action
+        return max_q_action
 
     def q_table_to_str(self):
         """Q_table をいい感じに複数行の文字列にして返す"""

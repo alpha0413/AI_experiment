@@ -44,5 +44,5 @@ train last 10:8.02
 
 平均step数
 
-train:
-test:
+train: 7.36
+test: 5.0
