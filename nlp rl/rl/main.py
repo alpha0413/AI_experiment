@@ -38,7 +38,7 @@ for interact_mode in ['train', 'test']:  # 一周目: train, 二周目: test
         render_buffer.prints('-------------------------------')
         render_buffer.prints('episode: {0} / {1}'.format(i_episode, n_episode[interact_mode]))
         # 環境を初期化して新たな episode を開始する
-        reward, done, sum_of_rewards, sum_of_step = 0.0, False, 0.0, 0.0
+        reward, done, sum_of_rewards, sum_of_steps = 0.0, False, 0.0, 0.0
         obs = env.reset()
         for time in range(n_max_time[interact_mode]):  # 各 step について
             if prints_detail[interact_mode]:
@@ -56,9 +56,9 @@ for interact_mode in ['train', 'test']:  # 一周目: train, 二周目: test
             # 環境に行動を与えて1ステップ進ませる
             obs, reward, done, info = env.step(action)
             sum_of_rewards += reward
-            sum_of_step += 1
+            sum_of_steps += 1
             render_buffer.prints(interact_mode, 'episode:', i_episode, 'T:', time,
-                                 'R:', sum_of_rewards,'step:', sum_of_step,'statistics:', agent.get_statistics())
+                                 'R:', sum_of_rewards,'step:', sum_of_steps,'statistics:', agent.get_statistics())
             if prints_detail[interact_mode]:
                 render_buffer.flush()  # 表示
             else:
@@ -79,7 +79,7 @@ for interact_mode in ['train', 'test']:  # 一周目: train, 二周目: test
         else:
             agent.stop_episode()
         sum_of_all_rewards += sum_of_rewards
-        sum_of_all_step += min(300,sum_of_step)
+        sum_of_all_step += min(300,sum_of_steps)
         # 数 episodes に一回、統計情報を表示
         if (i_episode + 1) % every_print_statistics[interact_mode] == 0 or prints_detail[interact_mode]:
             average_rewards = sum_of_all_rewards / (i_episode + 1)
