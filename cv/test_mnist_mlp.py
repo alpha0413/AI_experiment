@@ -52,9 +52,11 @@ def main():
 		# Forward
 		outputs = net(image)
 		# Predict the label
-		_, predicted = torch.max(outputs, 1)
+		# _, predicted = torch.max(outputs, 1)
+		_, predicted = torch.topk(outputs, 3)
+		predicted = predicted.tolist()
 		# Print the result
-		print('Predicted label : {}'.format(predicted.item()))
+		print('Predicted label : {}'.format(predicted))
 
 if __name__ == '__main__':
 	main()
