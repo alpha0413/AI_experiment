@@ -149,7 +149,8 @@ def main():
 	ax.legend()
 	ax.set_xlabel("Epoch")
 	ax.set_ylabel("Accuracy [%]")
-	ax.set_ylim(80, 100)
+	# ax.set_ylim(80, 100)
+	ax.set_ylim(0,100)
 
 	plt.savefig(args.out + '/accuracy_mnist_mlp.png')
 	#plt.show()
